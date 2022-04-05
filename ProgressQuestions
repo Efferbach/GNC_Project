@@ -1,0 +1,8 @@
+The UAV frontend is treated as a triangle to simplify area calculations
+No slip stream since the UAV is mostly flat in the z direction
+Only calculations for the linear part of the angle of attack (AOA)
+
+
+Ask about aerodynamic center for calculations for the pitching moment
+Ask about the moment moved by the r vector
+Ask about coefficients
