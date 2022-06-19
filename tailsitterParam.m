@@ -1,10 +1,11 @@
 clc
 addpath('./Thrust/');
 
-R_eb = axang2rotm([0 1 0 -1.572]);
+q_init = axang2quat([0 1 0 -1.572])';
 R_eleb1 = axang2rotm([0 0 1 -0.16349]);
 R_eleb2 = axang2rotm([0 0 1 0.15331]);
-t_be = [0.5;0;0.5];
+t_init = [0.5;0;0.5];
+eta_init = [t_init;q_init];
 
 m = 0.21; %kg
 g= -9.82; %m/s²
@@ -34,16 +35,6 @@ l = 0.145;
 Ith = 1.6*10^(-6);
 rpm2rad = 0.104719755;
 Omega_max = 1500;
-
-Omegas_0 = zeros(11,1);
-Thrusts_0 = zeros(11,1);
-for i = 0 : 1 : 10
-    Omega_0 = Thrust_inv(1, [0;0;0], [i;0;0;0], rp, rho, Ith, l, [100;100]);
-    Thrust_0 = Thrust_param(Omega_0, [0;0;0], 0, Ith, l, rho, rp);
-    Omegas_0(i+1) = Omega_0(1);
-    Thrusts_0(i+1) = Thrust_0(1);
-end
-Initial_coeffs = polyfit(Thrusts_0,Omegas_0,4);
 
 C_D_R = 1.1;
 dx = 130; %mm
